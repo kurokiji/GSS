@@ -3,12 +3,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StatusFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+
+        <ImageButton
+            android:id="@+id/protectionStatusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sync_in_progress"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/protectionStatusText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section1"
+            />
+
+        <TextView
+            android:id="@+id/protectionStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:textStyle="bold"
+            android:text="Sync in progress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/protectionStatusButton" />
+
+
+
+        <TextView
+            android:id="@+id/warningText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 intrussion detected"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section2" />
+
+
+        <ImageButton
+            android:id="@+id/disarmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/system_off"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@id/armButtom"
+            app:layout_constraintTop_toBottomOf="@id/section4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/disarmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Disarm System"
+            app:layout_constraintStart_toStartOf="@id/disarmButton"
+            app:layout_constraintEnd_toEndOf="@id/disarmButton"
+            app:layout_constraintTop_toBottomOf="@id/disarmButton" />
+
+        <ImageButton
+            android:id="@+id/armButtom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/system_on"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section4"
+            app:layout_constraintStart_toEndOf="@id/disarmButton"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/armText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text="Arm System"
+            app:layout_constraintEnd_toEndOf="@id/armButtom"
+            app:layout_constraintStart_toStartOf="@id/armButtom"
+            app:layout_constraintTop_toBottomOf="@id/armButtom"
+            />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/section1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="40dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/section2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="450dp" />
+
+      />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/section4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="510dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
