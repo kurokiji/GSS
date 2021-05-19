@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/status"
-        android:icon="@drawable/shield"
+        android:icon="@drawable/armed"
         android:title="Estado"/>
 
     <item

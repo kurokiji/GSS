@@ -1,12 +1,26 @@
 package com.kurokiji.gss;
 
+import android.app.ListFragment;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +28,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
+
+    // TODO no se muestra el titulo cuando la lista es demasiado larga
+    Retrofit retrofit;
+    SuperApi api;
+
+    ArrayList<LogEntry> logEntries = new ArrayList<LogEntry>();
+    ListView logListView;
+    LogAdapter adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,12 +75,47 @@ public class HistoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        retrofit = new Retrofit.Builder() // constructor por fases
+                .baseUrl(SuperApi.SERVER_URL)
+                .addConverterFactory(GsonConverterFactory.create()) // creando el conversor de JSON
+                .build();
+        api = retrofit.create(SuperApi.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_histort, container, false);
+        getLogEntries();
+        logListView = view.findViewById(R.id.historyListView);
+       adapter = new LogAdapter(view.getContext(), R.layout.log_item, logEntries);
+       logListView.setAdapter(adapter);
+        return view;
     }
+
+    public void getLogEntries(){
+        api.getNewLogEntry().enqueue(new Callback<List<LogEntry>>() {
+            @Override
+            public void onResponse(Call<List<LogEntry>> call, Response<List<LogEntry>> response) {
+                Log.d("RESPUESTA", "ha ido bien: " + call.toString());
+                logEntries.removeAll(logEntries);
+                for (LogEntry log : response.body()){
+                    logEntries.add(log); // estan bien guardados
+                }
+                // TODO si es el mismo, no volver a cargar, o apuntar la hora y añadir los nuevos
+
+//                for(LogEntry newLog: logEntries){
+//                    Log.d("array", "onResponse: " + newLog.getEvent());
+//                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<LogEntry>> call, Throwable t) {
+                Log.d("RESPUESTA", "ha ido mal: " + t.toString());
+            }
+        });
+    }
+
 }

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -32,7 +31,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
     TextView warningTextView;
 
 
-    ImageButton armButtom;
+    ImageButton armButton;
     TextView armText;
     ImageButton disarmButton;
     TextView disarmText;
@@ -98,12 +97,14 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         protectionStatusText = view.findViewById(R.id.protectionStatusText);
         warningTextView = view.findViewById(R.id.warningText);
         warningTextView.setVisibility(View.INVISIBLE);
-        armButtom = view.findViewById(R.id.armButtom);
-        armButtom.setOnClickListener(this);
+        armButton = view.findViewById(R.id.armButtom);
+        armButton.setOnClickListener(this);
         armText = view.findViewById(R.id.armText);
         disarmButton = view.findViewById(R.id.disarmButton);
         disarmButton.setOnClickListener(this);
         disarmText = view.findViewById(R.id.disarmText);
+        disarmButtonIsEnabled(false);
+        armButtonIsEnabled(false);
         return view;
     }
 
@@ -127,42 +128,59 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         Log.d("RESPUESTA", "switch: " + state.toString());
         switch (state){
             case "on":
-                protectionStatusButton.setImageResource(R.drawable.shield);
+                protectionStatusButton.setImageResource(R.drawable.armed);
                 protectionStatusText.setText("Armed");
-                armButtom.setAlpha(20);
-                armText.setAlpha(0.2f);
-                disarmButton.setAlpha(100);
-                disarmText.setAlpha(1);
+                armButtonIsEnabled(false);
+                disarmButtonIsEnabled(true);
                 break;
             case "off":
-                protectionStatusButton.setImageResource(R.drawable.not_protected);
+                protectionStatusButton.setImageResource(R.drawable.disarmed);
                 protectionStatusText.setText("Disarmed");
-                disarmButton.setAlpha(20);
-                disarmText.setAlpha(0.2f);
-                armButtom.setAlpha(100);
-                armText.setAlpha(1);
+                armButtonIsEnabled(true);
+                disarmButtonIsEnabled(false);
                 break;
             case "alert":
-                protectionStatusButton.setImageResource(R.drawable.big_warning);
+                protectionStatusButton.setImageResource(R.drawable.intrusion);
                 protectionStatusText.setText("Intrusion");
                 warningTextView.setVisibility(View.VISIBLE);
                 warningTextView.setText("" + totalWarning + " intrusiones detectadas");
-                disarmButton.setAlpha(20);
-                disarmText.setAlpha(0.2f);
-                armButtom.setAlpha(100);
-                armText.setAlpha(1);
+                armButtonIsEnabled(false);
+                disarmButtonIsEnabled(true);
                 break;
             case "error":
                 protectionStatusButton.setImageResource(R.drawable.sync_problem);
                 protectionStatusText.setText("Can't sync");
-                disarmButton.setAlpha(20);
-                disarmText.setAlpha(0.2f);
-                armButtom.setAlpha(20);
-                armText.setAlpha(0.2f);
+                armButtonIsEnabled(false);
+                disarmButtonIsEnabled(false);
                 break;
         }
 
     }
+
+    public void disarmButtonIsEnabled(boolean enabled){
+        if (enabled) {
+            disarmButton.setAlpha(255);
+            disarmText.setAlpha(1);
+            disarmButton.setClickable(true);
+        } else {
+            disarmButton.setAlpha(20);
+            disarmText.setAlpha(0.2f);
+            disarmButton.setClickable(false);
+        }
+    }
+
+    public void armButtonIsEnabled(boolean enabled){
+        if (enabled) {
+            armButton.setAlpha(255);
+            armText.setAlpha(1);
+            armButton.setClickable(true);
+        } else {
+            armButton.setAlpha(20);
+            armText.setAlpha(0.2f);
+            armButton.setClickable(false);
+        }
+    }
+
 
     public void armSystem(){
         api.putState("on").enqueue(new Callback<String>() {

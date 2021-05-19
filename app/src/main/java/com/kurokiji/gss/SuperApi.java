@@ -1,5 +1,7 @@
 package com.kurokiji.gss;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -13,6 +15,9 @@ public interface SuperApi {
 
     @GET("state")
     Call<String> getNewState();
+
+    @GET("log")
+    Call<List<LogEntry>> getNewLogEntry();
 
     @FormUrlEncoded
     @PUT("state")
