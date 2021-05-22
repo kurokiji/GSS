@@ -6,18 +6,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
 import android.text.Html;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,19 +24,11 @@ import android.widget.TextView;
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     TextView ipChangeButton;
-    Button pinChangeButton;
+    TextView pinChangeButton;
     Switch pinRequestSwitch;
+    MainActivity localMainActivity;
 
-    String ipData;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    boolean pinResult;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -49,29 +38,17 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment SettingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
+    public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
     }
 
     @Override
@@ -82,8 +59,17 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         ipChangeButton = view.findViewById(R.id.ipSystem);
         ipChangeButton.setOnClickListener(this);
         pinChangeButton = view.findViewById(R.id.changePinButton);
+        pinChangeButton.setOnClickListener(this);
         pinRequestSwitch = view.findViewById(R.id.requestPinSwitch);
+        localMainActivity = (MainActivity) getActivity();
+        ipChangeButton.setText(localMainActivity.currentUser.getUserIpData());
+        if(localMainActivity.currentUser.isRequestPinData()){
+            pinRequestSwitch.setChecked(true);
+        } else {
+            pinRequestSwitch.setChecked(false);
+        }
         switchListener();
+
 
         return view;
     }
@@ -92,14 +78,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ipSystem:
-                launchDeleteDialog();
+                launchEditIpDialog();
                 break;
             case R.id.changePinButton:
+                launchChangePinDialog();
                 break;
         }
     }
 
-    public void launchDeleteDialog(){
+    // TODO add validacion a IP
+    public void launchEditIpDialog(){
         LayoutInflater li = LayoutInflater.from(getContext());
         View ipDialog = li.inflate(R.layout.ip_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -110,11 +98,21 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         final EditText ipHolder2 = (EditText) ipDialog.findViewById(R.id.ipHolder2);
         final EditText ipHolder3 = (EditText) ipDialog.findViewById(R.id.ipHolder3);
         final EditText ipHolder4 = (EditText) ipDialog.findViewById(R.id.ipHolder4);
+
+        String[] parts = localMainActivity.currentUser.getUserIpData().split("\\.");
+        ipHolder1.setText(parts[0]);
+        ipHolder2.setText(parts[1]);
+        ipHolder3.setText(parts[2]);
+        ipHolder4.setText(parts[3]);
+
         builder.setPositiveButton(Html.fromHtml("<font color='#FFF'>Save</font>"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ipData= ipHolder1.getText().toString() + "." + ipHolder2.getText().toString() + "." + ipHolder3.getText().toString() + "." + ipHolder4.getText().toString();
+                // TODO intentar validar
+                String ipData= ipHolder1.getText().toString() + "." + ipHolder2.getText().toString() + "." + ipHolder3.getText().toString() + "." + ipHolder4.getText().toString();
                 ipChangeButton.setText(ipData);
+               localMainActivity.currentUser.setUserIpData(ipData);
+               localMainActivity.saveData();
             }
         });
 
@@ -133,13 +131,84 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // password disable
-                    Log.d("switch", "onCheckedChanged: encendido");
+                    localMainActivity.currentUser.setRequestPinData(true);
+                    localMainActivity.saveData();
+
                 } else {
-                    // The toggle is disabled
-                    // pedir comprobacion para quitar la contrasenia
-                    Log.d("switch", "onCheckedChanged: apagado");
+                    launchDisablePinDialog();
                 }
+            }
+        });
+    }
+
+
+    public void launchDisablePinDialog(){
+        Pinpad myPinPad = new Pinpad(getActivity());
+        myPinPad.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.welcome_background));
+        myPinPad.setCancelable(false);
+        myPinPad.show();
+
+        myPinPad.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (myPinPad.pinOk){
+                    localMainActivity.currentUser.setRequestPinData(false);
+                    localMainActivity.saveData();
+                }
+            }
+        });
+        myPinPad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Toast cancelToast = Toast.makeText(getActivity(), "You must match your PIN", Toast.LENGTH_LONG);
+                cancelToast.show();
+                pinRequestSwitch.setChecked(true);
+            }
+        });
+    }
+
+    public void launchChangePinDialog(){
+        Pinpad myPinPad = new Pinpad(getActivity());
+        myPinPad.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.welcome_background));
+        myPinPad.setCancelable(false);
+        myPinPad.show();
+        myPinPad.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (myPinPad.pinOk){
+                    changePinDialog();
+                }
+            }
+        });
+        myPinPad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                pinResult = false;
+                Toast cancelToast = Toast.makeText(getActivity(), "You must match your PIN", Toast.LENGTH_LONG);
+                cancelToast.show();
+            }
+        });
+    }
+
+    public void changePinDialog(){
+        ChangePinDialog changePin = new ChangePinDialog(getActivity());
+        changePin.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.welcome_background));
+        changePin.setCancelable(false);
+        changePin.show();
+
+        changePin.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (changePin.changePinAccepted){
+                    localMainActivity.currentUser.setPassword(changePin.newPin);
+                    localMainActivity.saveData();
+                }
+            }
+        });
+        changePin.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
             }
         });
     }

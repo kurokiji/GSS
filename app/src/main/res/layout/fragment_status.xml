@@ -20,7 +20,7 @@
             app:layout_constraintBottom_toTopOf="@id/protectionStatusText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/section1"
+            app:layout_constraintTop_toBottomOf="@id/section2"
             />
 
         <TextView
@@ -30,6 +30,7 @@
             android:textSize="35dp"
             android:textStyle="bold"
             android:text="Sync in progress"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/protectionStatusButton" />
@@ -40,11 +41,14 @@
             android:id="@+id/warningText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2 intrussion detected"
+            android:text="Intrusion detected"
             android:textSize="30dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/my_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/section2" />
+            app:layout_constraintTop_toBottomOf="@id/section3" />
 
 
         <ImageButton
@@ -95,14 +99,14 @@
 
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/section1"
+            android:id="@+id/section2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="40dp" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/section2"
+            android:id="@+id/section3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

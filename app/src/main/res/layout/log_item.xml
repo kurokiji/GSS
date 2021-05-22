@@ -5,51 +5,85 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/eventIcon"
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/armed_list"
+        android:id="@+id/dateSection"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/section1"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/logSection">
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="35dp"
+            android:textColor="@color/my_yellow"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:text="May 30 2021" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/hourTextView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/section1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingVertical="15dp"
-        android:text="23:59"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:id="@+id/logSection"
+        app:layout_constraintTop_toBottomOf="@id/dateSection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:id="@+id/eventIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/armed_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/section2"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/eventTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/section2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="26dp"
-        android:paddingVertical="15dp"
-        android:text="Intrusion detectada" />
+        <TextView
+            android:id="@+id/hourTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/section2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingVertical="15dp"
+            android:text="23:59"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/section1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="66dp" />
+        <TextView
+            android:id="@+id/eventTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/section3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="26dp"
+            android:paddingVertical="15dp"
+            android:text="Intrusion detectada" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/section2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="148dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/section2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="66dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/section3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="148dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

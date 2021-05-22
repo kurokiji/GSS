@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="20dp"
+    android:background="@drawable/pin_pad_background">
+
+
+    <TextView
+        android:id="@+id/pinPadInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:text="Insert your PIN"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/holder1"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/welcome_background"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@id/holder2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleSection" />
+
+    <TextView
+        android:id="@+id/holder2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/welcome_background"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@id/holder3"
+        app:layout_constraintStart_toEndOf="@id/holder1"
+        app:layout_constraintTop_toBottomOf="@id/titleSection" />
+
+    <TextView
+        android:id="@+id/holder3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/welcome_background"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@id/holder4"
+        app:layout_constraintStart_toEndOf="@id/holder2"
+        app:layout_constraintTop_toBottomOf="@id/titleSection" />
+
+    <TextView
+        android:id="@+id/holder4"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/welcome_background"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/holder3"
+        app:layout_constraintTop_toBottomOf="@id/titleSection" />
+
+    <TextView
+        android:id="@+id/number1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@id/number4"
+        app:layout_constraintStart_toEndOf="@id/number2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pinHolderSection" />
+
+    <TextView
+        android:id="@+id/number2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/number3"
+        app:layout_constraintStart_toEndOf="@id/number1"
+        app:layout_constraintTop_toBottomOf="@id/pinHolderSection" />
+
+    <TextView
+        android:id="@+id/number3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/number2"
+        app:layout_constraintTop_toBottomOf="@id/pinHolderSection" />
+
+    <TextView
+        android:id="@+id/number4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/number5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number1" />
+
+    <TextView
+        android:id="@+id/number5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/number6"
+        app:layout_constraintStart_toEndOf="@id/number4"
+        app:layout_constraintTop_toBottomOf="@id/number2" />
+
+    <TextView
+        android:id="@+id/number6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/number5"
+        app:layout_constraintTop_toBottomOf="@id/number3" />
+
+    <TextView
+        android:id="@+id/number7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="7"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/number8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number4" />
+
+    <TextView
+        android:id="@+id/number8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="8"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/number9"
+        app:layout_constraintStart_toEndOf="@id/number7"
+        app:layout_constraintTop_toBottomOf="@id/number5" />
+
+    <TextView
+        android:id="@+id/number9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="9"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/number8"
+        app:layout_constraintTop_toBottomOf="@id/number6" />
+
+    <TextView
+        android:id="@+id/deleteKey"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="del."
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@id/number0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number7" />
+
+    <TextView
+        android:id="@+id/number0"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@id/exit"
+        app:layout_constraintStart_toEndOf="@id/number7"
+        app:layout_constraintTop_toBottomOf="@id/number8" />
+
+    <TextView
+        android:id="@+id/exit"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pin_pad_button"
+        android:gravity="center"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="43dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/number0"
+        app:layout_constraintTop_toBottomOf="@id/number9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/pinHolderSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="133dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/titleSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="64dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

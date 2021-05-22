@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="50dp"
+    android:background="@color/my_blue"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/newPasswordEdit"
+        android:text="Set New Password"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+
+        />
+
+    <EditText
+        android:id="@+id/newPasswordEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@id/repeatNewPasswordEdit"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:maxLength="4"
+        android:textAlignment="viewEnd"
+        android:hint="new password"
+        android:inputType="numberPassword" />
+
+    <EditText
+        android:id="@+id/repeatNewPasswordEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newPasswordEdit"
+        app:layout_constraintBottom_toTopOf="@id/sendButton"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:maxLength="4"
+        android:textAlignment="viewEnd"
+        android:hint="repeat new password"
+        android:inputType="numberPassword" />
+
+    <TextView
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/repeatNewPasswordEdit"
+        app:layout_constraintTop_toBottomOf="@id/repeatNewPasswordEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="Change"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/my_blue"
+        android:background="@drawable/login_field_background"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

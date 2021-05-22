@@ -119,14 +119,19 @@
         android:textSize="20dp"
         />
 
-    <Button
+    <TextView
         android:id="@+id/changePinButton"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         app:layout_constraintTop_toTopOf="@id/changePinText"
         app:layout_constraintBottom_toBottomOf="@id/changePinText"
         app:layout_constraintEnd_toStartOf="@id/lateralGuide"
-        android:text="OK" />
+        android:background="@drawable/login_field_background"
+        android:paddingHorizontal="7dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Change" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/titleSection"
@@ -140,5 +145,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="375dp" />
+        app:layout_constraintGuide_percent="0.90" />
 </androidx.constraintlayout.widget.ConstraintLayout>

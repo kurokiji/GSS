@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LoginFragment">
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/introText"
+        android:textSize="30dp"
+        android:textColor="@color/my_yellow"
+        android:textStyle="bold"
+        android:text="Log In" />
+
+    <TextView
+        android:id="@+id/introText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/loginText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/emailEditText"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="130dp"
+        android:textColor="@color/cardview_shadow_start_color"
+        android:gravity="center"
+        android:text="Welcome to the most advance and powerful security system" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/introText"
+        app:layout_constraintBottom_toTopOf="@id/passwordEditText"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:ems="10"
+        android:hint="email"
+        android:inputType="text|textNoSuggestions"
+        android:background="@drawable/login_field_background"/>
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
+        app:layout_constraintBottom_toTopOf="@id/sendButton"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="numberPassword"
+        android:background="@drawable/login_field_background"/>
+
+    <TextView
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Send"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/white"
+        android:background="@drawable/welcome_background"/>
+
+    <TextView
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Sing Up"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/my_yellow"
+        android:background="@drawable/login_field_background"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

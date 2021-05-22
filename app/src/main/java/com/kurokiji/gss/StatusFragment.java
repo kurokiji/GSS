@@ -1,13 +1,18 @@
 package com.kurokiji.gss;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -15,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
@@ -36,16 +42,16 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
     ImageButton disarmButton;
     TextView disarmText;
 
-    //TODO aumentar con cada objeto alert
-    int totalWarning = 5;
+    MainActivity localMainActivity;
 
-    // TODO: Rename parameter arguments, choose names that match
+    //TODO aumentar con cada objeto alert
+
+    // TODO: Llevarse los parametros a constantes
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
+
+    private Boolean welcomeDoneData;
     private String mParam2;
 
     public StatusFragment() {
@@ -56,35 +62,27 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment statusFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatusFragment newInstance(String param1, String param2) {
+    public static StatusFragment newInstance() {
         StatusFragment fragment = new StatusFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         retrofit = new Retrofit.Builder() // constructor por fases
                 .baseUrl(SuperApi.SERVER_URL)
                 .addConverterFactory(ScalarsConverterFactory.create()) // solo para conversiones de tipos primitivos
-                .addConverterFactory(ScalarsConverterFactory.create()) // creando el conversor de JSON
+                .addConverterFactory(GsonConverterFactory.create()) // creando el conversor de JSON
                 .build();
         api = retrofit.create(SuperApi.class);
-        getActualState();
+
        // changeStatusImage(currentStatus);
     }
 
@@ -92,10 +90,12 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_status, container, false);
+        localMainActivity = (MainActivity) getActivity();
         protectionStatusButton = view.findViewById(R.id.protectionStatusButton);
         protectionStatusButton.setOnClickListener(this);
         protectionStatusText = view.findViewById(R.id.protectionStatusText);
         warningTextView = view.findViewById(R.id.warningText);
+        warningTextView.setOnClickListener(this);
         warningTextView.setVisibility(View.INVISIBLE);
         armButton = view.findViewById(R.id.armButtom);
         armButton.setOnClickListener(this);
@@ -103,29 +103,37 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         disarmButton = view.findViewById(R.id.disarmButton);
         disarmButton.setOnClickListener(this);
         disarmText = view.findViewById(R.id.disarmText);
-        disarmButtonIsEnabled(false);
-        armButtonIsEnabled(false);
+        getActualState();
+        welcomeDialogLauncher();
         return view;
     }
 
     public void getActualState(){
+        disarmButtonIsEnabled(false);
+        armButtonIsEnabled(false);
+        protectionStatusButton.setClickable(false);
+        protectionStatusButton.setImageResource(R.drawable.sync_in_progress);
+        protectionStatusText.setText("Sync in progress");
         api.getNewState().enqueue((new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Log.d("RESPUESTA", "onResponse: " + response.body());
-                String status = response.body().replace('"', ' ').trim();
+                String status = response.body()
+                        .replace('"', ' ')
+                        .trim();
                 changeUiByStatus(status);
+                protectionStatusButton.setClickable(true);
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 changeUiByStatus("error");
+                protectionStatusButton.setClickable(true);
             }
         }));
     }
 
     public void changeUiByStatus(String state){
-        Log.d("RESPUESTA", "switch: " + state.toString());
         switch (state){
             case "on":
                 protectionStatusButton.setImageResource(R.drawable.armed);
@@ -143,7 +151,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
                 protectionStatusButton.setImageResource(R.drawable.intrusion);
                 protectionStatusText.setText("Intrusion");
                 warningTextView.setVisibility(View.VISIBLE);
-                warningTextView.setText("" + totalWarning + " intrusiones detectadas");
                 armButtonIsEnabled(false);
                 disarmButtonIsEnabled(true);
                 break;
@@ -183,29 +190,37 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
 
 
     public void armSystem(){
-        api.putState("on").enqueue(new Callback<String>() {
+        disarmButtonIsEnabled(false);
+        armButtonIsEnabled(false);
+        protectionStatusButton.setClickable(false);
+        protectionStatusText.setText("Arming");
+        api.putState(new State("on")).enqueue(new Callback<State>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("RESPUESTA", "respueta " + response.raw());
+            public void onResponse(Call<State> call, Response<State> response) {
+                Log.d("RESPUESTA", "respueta " + response.headers() + response.raw());
                 getActualState();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<State> call, Throwable t) {
                 getActualState();
             }
         });
     }
 
     public void disarmSystem(){
-        api.putState("off").enqueue(new Callback<String>() {
+        disarmButtonIsEnabled(false);
+        armButtonIsEnabled(false);
+        protectionStatusButton.setClickable(false);
+        protectionStatusText.setText("Disarming");
+        api.putState(new State("off")).enqueue(new Callback<State>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<State> call, Response<State> response) {
                 getActualState();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<State> call, Throwable t) {
                 getActualState();
             }
         });
@@ -223,6 +238,40 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
             case R.id.protectionStatusButton:
                 getActualState();
                 break;
+            case R.id.warningText:
+                armSystem();
+                localMainActivity.botttomMenuView.setSelectedItemId(R.id.history);
+                localMainActivity.loadFragment(HistoryFragment.newInstance("",""));
+                break;
         }
     }
+
+public void welcomeDialogLauncher(){
+        if(localMainActivity.currentUser.getWelcomeDoneData() != true){
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.welcome_dialog);
+            dialog.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.welcome_background));
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(false);
+            TextView dismiss = dialog.findViewById(R.id.dismissButton);
+            dismiss.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    localMainActivity.currentUser.setWelcomeDoneData(true);
+                    localMainActivity.saveData();
+                }
+            });
+            dialog.show();
+        }
+}
+
+
+    public void pinPadDialog(){
+        LayoutInflater li = LayoutInflater.from(getContext());
+        View welcomeImage = li.inflate(R.layout.welcome_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(welcomeImage);
+    }
+
 }

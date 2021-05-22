@@ -1,10 +1,9 @@
 package com.kurokiji.gss;
 
-import android.app.ListFragment;
+import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,18 +97,15 @@ public class HistoryFragment extends Fragment {
 
     public void getLogEntries(){
         api.getNewLogEntry().enqueue(new Callback<List<LogEntry>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<LogEntry>> call, Response<List<LogEntry>> response) {
                 Log.d("RESPUESTA", "ha ido bien: " + call.toString());
                 logEntries.removeAll(logEntries);
                 for (LogEntry log : response.body()){
-                    logEntries.add(log); // estan bien guardados
+                    logEntries.add(log);
                 }
-                // TODO si es el mismo, no volver a cargar, o apuntar la hora y añadir los nuevos
-
-//                for(LogEntry newLog: logEntries){
-//                    Log.d("array", "onResponse: " + newLog.getEvent());
-//                }
+                dateTitlesConfig();
                 adapter.notifyDataSetChanged();
             }
 
@@ -116,6 +114,32 @@ public class HistoryFragment extends Fragment {
                 Log.d("RESPUESTA", "ha ido mal: " + t.toString());
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sortDates(){
+        logEntries.sort(new StateSorter());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void dateTitlesConfig(){
+        sortDates();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd");
+        String previousDate = null;
+        for (LogEntry log: logEntries){
+            Long primitiveDate = log.getDate();
+            String currentDay = dateFormatter.format(new Date(primitiveDate));
+            if (previousDate != null){
+                if(previousDate.equals(currentDay)){
+                    log.setNewDate(false);
+                } else {
+                    log.setNewDate(true);
+                }
+            } else {
+                log.setNewDate(true);
+            }
+            previousDate = currentDay;
+        }
     }
 
 }
