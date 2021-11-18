@@ -1,5 +1,7 @@
 package com.kurokiji.gss;
 
+import com.kurokiji.gss.models.LogEntry;
+
 import java.util.Comparator;
 
 public class StateSorter implements Comparator<LogEntry> {

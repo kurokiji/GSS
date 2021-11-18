@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.models;
 
 public class User {
 

@@ -1,20 +1,22 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.mainfragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.models.State;
+import com.kurokiji.gss.interfaces.SuperApi;
+import com.kurokiji.gss.activities.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,16 +45,6 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
     TextView disarmText;
 
     MainActivity localMainActivity;
-
-    //TODO aumentar con cada objeto alert
-
-    // TODO: Llevarse los parametros a constantes
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-
-
-    private Boolean welcomeDoneData;
-    private String mParam2;
 
     public StatusFragment() {
         // Required empty public constructor
@@ -137,26 +129,26 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         switch (state){
             case "on":
                 protectionStatusButton.setImageResource(R.drawable.armed);
-                protectionStatusText.setText("Armed");
+                protectionStatusText.setText(R.string.armed_status);
                 armButtonIsEnabled(false);
                 disarmButtonIsEnabled(true);
                 break;
             case "off":
                 protectionStatusButton.setImageResource(R.drawable.disarmed);
-                protectionStatusText.setText("Disarmed");
+                protectionStatusText.setText(R.string.disarmed_status);
                 armButtonIsEnabled(true);
                 disarmButtonIsEnabled(false);
                 break;
             case "alert":
                 protectionStatusButton.setImageResource(R.drawable.intrusion);
-                protectionStatusText.setText("Intrusion");
+                protectionStatusText.setText(R.string.intrusion_status);
                 warningTextView.setVisibility(View.VISIBLE);
                 armButtonIsEnabled(false);
                 disarmButtonIsEnabled(true);
                 break;
             case "error":
                 protectionStatusButton.setImageResource(R.drawable.sync_problem);
-                protectionStatusText.setText("Can't sync");
+                protectionStatusText.setText(R.string.cant_sync_status);
                 armButtonIsEnabled(false);
                 disarmButtonIsEnabled(false);
                 break;
@@ -193,7 +185,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         disarmButtonIsEnabled(false);
         armButtonIsEnabled(false);
         protectionStatusButton.setClickable(false);
-        protectionStatusText.setText("Arming");
+        protectionStatusText.setText(R.string.arming_status);
         api.putState(new State("on")).enqueue(new Callback<State>() {
             @Override
             public void onResponse(Call<State> call, Response<State> response) {
@@ -212,7 +204,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener{
         disarmButtonIsEnabled(false);
         armButtonIsEnabled(false);
         protectionStatusButton.setClickable(false);
-        protectionStatusText.setText("Disarming");
+        protectionStatusText.setText(R.string.disarming_status);
         api.putState(new State("off")).enqueue(new Callback<State>() {
             @Override
             public void onResponse(Call<State> call, Response<State> response) {

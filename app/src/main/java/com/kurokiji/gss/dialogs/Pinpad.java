@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.activities.MainActivity;
 
 public class Pinpad extends Dialog implements android.view.View.OnClickListener{
     public Activity myActivity;
@@ -134,7 +137,7 @@ public class Pinpad extends Dialog implements android.view.View.OnClickListener{
             dismiss();
         } else{
             deletePin();
-            pinPadInfo.setText("Incorrect PIN");
+            pinPadInfo.setText(R.string.incorrect_pin);
             pinPadInfo.setTextColor(myActivity.getResources().getColor(R.color.my_red));
         }
     }

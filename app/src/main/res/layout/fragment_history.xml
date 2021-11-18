@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HistoryFragment">
+    tools:context=".mainfragments.HistoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -25,7 +25,7 @@
         app:layout_constraintStart_toEndOf="@id/historyTitleIcon"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="70dp"
-        android:text="Activity History"
+        android:text="@string/fragment_history_title"
         android:paddingVertical="15dp"
         android:textSize="35dp"
         android:textStyle="bold" />

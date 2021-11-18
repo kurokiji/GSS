@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.mainfragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,11 +27,6 @@ public class ProfileFragment extends Fragment {
     ImageView userProfileImageView;
     MainActivity localMainActivity;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String USEREMAIL_DATA = "param1";
-
-    // TODO: Rename and change types of parameters
 
     public ProfileFragment() {
         // Required empty public constructor

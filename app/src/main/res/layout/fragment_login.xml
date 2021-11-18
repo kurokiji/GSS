@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LoginFragment">
+    tools:context=".loginFragments.LoginFragment">
 
     <TextView
         android:id="@+id/loginText"
@@ -18,7 +18,7 @@
         android:textSize="30dp"
         android:textColor="@color/my_yellow"
         android:textStyle="bold"
-        android:text="Log In" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/introText"
@@ -33,7 +33,7 @@
         android:paddingHorizontal="130dp"
         android:textColor="@color/cardview_shadow_start_color"
         android:gravity="center"
-        android:text="Welcome to the most advance and powerful security system" />
+        android:text="@string/login_disclaimer" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -47,7 +47,7 @@
         android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:ems="10"
-        android:hint="email"
+        android:hint="@string/email_hint"
         android:inputType="text|textNoSuggestions"
         android:background="@drawable/login_field_background"/>
 
@@ -63,7 +63,7 @@
         android:layout_marginTop="15dp"
         android:textSize="20dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="@string/password_hint"
         android:inputType="numberPassword"
         android:background="@drawable/login_field_background"/>
 
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@id/passwordEditText"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="20dp"
-        android:text="Send"
+        android:text="@string/send_button"
         android:textSize="20dp"
         android:textStyle="bold"
         android:paddingHorizontal="15dp"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@id/passwordEditText"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="20dp"
-        android:text="Sing Up"
+        android:text="@string/sign_up_button"
         android:textSize="20dp"
         android:textStyle="bold"
         android:paddingHorizontal="15dp"

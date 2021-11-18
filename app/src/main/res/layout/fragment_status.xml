@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StatusFragment">
+    tools:context=".mainfragments.StatusFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,6 @@
             android:id="@+id/protectionStatusButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/sync_in_progress"
             android:background="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/protectionStatusText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +28,6 @@
             android:layout_height="wrap_content"
             android:textSize="35dp"
             android:textStyle="bold"
-            android:text="Sync in progress"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +66,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:text="Disarm System"
+            android:text="@string/disarm_system_button"
             app:layout_constraintStart_toStartOf="@id/disarmButton"
             app:layout_constraintEnd_toEndOf="@id/disarmButton"
             app:layout_constraintTop_toBottomOf="@id/disarmButton" />
@@ -90,13 +88,11 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:text="Arm System"
+            android:text="@string/arm_system_button"
             app:layout_constraintEnd_toEndOf="@id/armButtom"
             app:layout_constraintStart_toStartOf="@id/armButtom"
             app:layout_constraintTop_toBottomOf="@id/armButtom"
             />
-
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/section2"
@@ -111,8 +107,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="450dp" />
-
-      />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/section4"

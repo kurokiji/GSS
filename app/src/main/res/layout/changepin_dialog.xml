@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/newPasswordEdit"
-        android:text="Set New Password"
+        android:text="@string/set_new_password"
         android:textSize="25dp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -34,7 +34,7 @@
         android:ems="10"
         android:maxLength="4"
         android:textAlignment="viewEnd"
-        android:hint="new password"
+        android:hint="@string/new_password"
         android:inputType="numberPassword" />
 
     <EditText
@@ -49,7 +49,7 @@
         android:ems="10"
         android:maxLength="4"
         android:textAlignment="viewEnd"
-        android:hint="repeat new password"
+        android:hint="@string/set_new_password"
         android:inputType="numberPassword" />
 
     <TextView
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/repeatNewPasswordEdit"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"
-        android:text="Change"
+        android:text="@string/change_button"
         android:textSize="18dp"
         android:textStyle="bold"
         android:paddingHorizontal="15dp"

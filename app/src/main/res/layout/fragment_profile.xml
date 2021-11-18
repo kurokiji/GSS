@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/my_yellow"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
 
     <ImageView
@@ -22,7 +22,6 @@
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UserName"
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -46,10 +45,8 @@
         android:id="@+id/userEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:gravity="center"
         android:paddingHorizontal="30dp"
-        android:text="hola@kurokiji.com"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@id/emailTitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +57,7 @@
         android:id="@+id/emailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email"
+        android:text="@string/email_hint"
         android:textColor="@color/my_yellow"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -74,7 +71,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingHorizontal="30dp"
-        android:text="192.167.67.54"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@id/ipTitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +81,7 @@
         android:id="@+id/ipTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="your system IP"
+        android:text="@string/system_ip_profile"
         android:textColor="@color/my_yellow"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -99,7 +95,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingHorizontal="80dp"
-        android:text="We don't collect your personal data, all your data is safe, right here, at your phone."
+        android:text="@string/profile_disclaimer"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

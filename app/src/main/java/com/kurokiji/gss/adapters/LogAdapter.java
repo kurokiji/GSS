@@ -1,7 +1,6 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.models.LogEntry;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -70,17 +72,17 @@ public class LogAdapter extends ArrayAdapter {
 
         switch (logs.get(position).getEvent()){
             case("on"):
-//                eventText.setText("Sistema encendido");
+//                eventText.setText(R.string.system_on_log);
                 eventText.setText(dateFormatter.format((new Date(primitiveDate))));
                 eventIcon.setImageResource(R.drawable.armed_list);
                 break;
             case("off"):
-//                eventText.setText("Sistema apagado");
+//                eventText.setText(R.string.system_off_log);
                 eventText.setText(dateFormatter.format((new Date(primitiveDate))));
                 eventIcon.setImageResource(R.drawable.disarmed_list);
                 break;
             case("alert"):
-//                eventText.setText("Intrusión detectada");
+//                eventText.setText(R.string.intrusion_detected);
                 eventText.setText(dateFormatter.format((new Date(primitiveDate))));
                 // TODO sumar a intrusiones para que aparezca el contador en status
                 eventIcon.setImageResource(R.drawable.intrusion_list);

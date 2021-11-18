@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.mainfragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kurokiji.gss.dialogs.ChangePinDialog;
+import com.kurokiji.gss.dialogs.Pinpad;
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.

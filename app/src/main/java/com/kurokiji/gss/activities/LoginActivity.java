@@ -1,10 +1,15 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
+import com.kurokiji.gss.loginFragments.LoginFragment;
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.loginFragments.SignUpFragment;
+import com.kurokiji.gss.interfaces.SuperApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;

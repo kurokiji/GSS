@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.loginFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.kurokiji.gss.Constants;
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.interfaces.SuperApi;
+import com.kurokiji.gss.models.User;
+import com.kurokiji.gss.activities.LoginActivity;
+import com.kurokiji.gss.activities.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,15 +43,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     TextView logInButton;
 
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public SignUpFragment() {
         // Required empty public constructor
     }
@@ -53,16 +51,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment SingUpFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static SignUpFragment newInstance(String param1, String param2) {
         SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,8 +65,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         retrofitInit();
@@ -107,7 +99,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d("login", "onResponse: " + response.body());
-                // TODO
                 String email = emailEditText.getText().toString();
                loadMainActivity(user, password, email);
             }
@@ -124,26 +115,31 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sendButton:
-
-               // TODO VALIDAR DATOS
-                 loadMainActivity(userEditText.getText().toString(), passwordEditText.getText().toString(), emailEditText.getText().toString());
-//                signUp(userEditText.getText().toString(), passwordEditText.getText().toString());
+                if (fieldValidation()){
+                    signUp(userEditText.getText().toString(), passwordEditText.getText().toString());
+                }
+//                 loadMainActivity(userEditText.getText().toString(), passwordEditText.getText().toString(), emailEditText.getText().toString());
                 break;
             case R.id.loginButton:
                     LoginActivity loginActivity = new LoginActivity();
                     loginActivity.openLogInFragment();
-                    // TODO hace un raro al abrir desde aqui
+                    // TODO la actividad termina y no carga
                 break;
         }
     }
 
     public boolean fieldValidation() {
-        //TODO validar email
         if (userEditText.getText() == null) {
             userEditText.setError("You have to write your user");
             return false;
         }
-        if (passwordEditText.getText() == null || passwordEditText.getText().toString().length() > 4 || passwordEditText.getText().toString().length() < 4) {
+
+        if (emailEditText.getText() == null){
+            emailEditText.setError("You hace to write yout email");
+            return false;
+        }
+
+        if (passwordEditText.getText() == null || passwordEditText.getText().toString().length() < 4) {
             passwordEditText.setError("Your password must have 4 for numeric characters");
             return false;
         } else { return true; }

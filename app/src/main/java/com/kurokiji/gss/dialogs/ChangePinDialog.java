@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.kurokiji.gss.R;
 
 public class ChangePinDialog extends Dialog implements android.view.View.OnClickListener {
 

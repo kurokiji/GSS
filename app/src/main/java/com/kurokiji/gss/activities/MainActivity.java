@@ -1,4 +1,4 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +10,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kurokiji.gss.Constants;
+import com.kurokiji.gss.mainfragments.HistoryFragment;
+import com.kurokiji.gss.mainfragments.ProfileFragment;
+import com.kurokiji.gss.R;
+import com.kurokiji.gss.mainfragments.SettingsFragment;
+import com.kurokiji.gss.mainfragments.StatusFragment;
+import com.kurokiji.gss.interfaces.SuperApi;
+import com.kurokiji.gss.models.UserProfile;
 
 import java.io.File;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import retrofit2.Retrofit;
@@ -27,12 +33,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView botttomMenuView;
-    Retrofit retrofit;
-    SuperApi api;
+    public BottomNavigationView botttomMenuView;
+    public Retrofit retrofit;
+    public SuperApi api;
 
-    UserProfile currentUser;
-    HashMap<String, UserProfile> userProfiles = new HashMap<String, UserProfile>();
+    public UserProfile currentUser;
+    public HashMap<String, UserProfile> userProfiles = new HashMap<String, UserProfile>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

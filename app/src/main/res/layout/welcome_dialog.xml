@@ -20,7 +20,7 @@
         android:paddingVertical="10dp"
         app:layout_constraintBottom_toTopOf="@id/profilePic"
         android:textStyle="bold"
-        android:text="Tap to update" />
+        android:text="@string/tap_to_update_title" />
 
     <ImageView
         android:id="@+id/profilePic"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingTop="25dp"
         android:layout_marginBottom="20dp"
-        android:text="Dismiss"
+        android:text="@string/dismiss_button"
         android:textColor="@color/white"
         android:textSize="25dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

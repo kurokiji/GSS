@@ -1,13 +1,14 @@
-package com.kurokiji.gss;
+package com.kurokiji.gss.interfaces;
+
+import com.kurokiji.gss.models.LogEntry;
+import com.kurokiji.gss.models.State;
+import com.kurokiji.gss.models.User;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
